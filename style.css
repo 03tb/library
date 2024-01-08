@@ -1,0 +1,70 @@
+/* Reset CSS */
+body, h1, h2, h3, h4, h5, ul {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5 {
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+/* End Reset CSS */
+
+.container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 200px;
+}
+
+.nav {
+    grid-column: 2/3;
+    background-color: blueviolet;
+    padding-top: 40px;
+    padding-left: 40px;
+}
+
+.add-book-section {
+    height: 100vh;
+    grid-column: 1/2;
+    grid-row: 1/3;
+    padding: 50px;
+    background-color: rgb(138, 136, 136);
+}
+
+.book-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.book-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-template-rows: repeat(auto-fill, 400px);
+    padding-top: 40px;
+    padding-left: 40px;
+    gap: 50px;
+}
+
+.book-container {
+    padding: 30px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
