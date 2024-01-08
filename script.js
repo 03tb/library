@@ -21,9 +21,9 @@ const hasRead = document.querySelector('#hasRead');
 addBook.addEventListener('click', (event) => {
     event.preventDefault();
     if (hasRead.checked === true) {
-        new Book(bookName.value, bookAuthor.value, bookPages.value, 'Read', myLibrary.length)
+        new Book(bookName.value, bookAuthor.value, bookPages.value, true, myLibrary.length)
     } else {
-        new Book(bookName.value, bookAuthor.value,  bookPages.value, 'Not read', myLibrary.length)
+        new Book(bookName.value, bookAuthor.value,  bookPages.value, false, myLibrary.length)
     }
     console.log(myLibrary);
     displayBook(myLibrary);
@@ -58,16 +58,28 @@ function displayBook(myLibrary) {
         const readStatus = document.createElement('h3');
         readStatus.className = 'read-status';
 
+        const readBookBtn = document.createElement('button');
+        readBookBtn.className = 'read-book';
+        readBookBtn.textContent = 'Read / Unread';
+
         bookName.textContent = `${myLibrary[i].title}`;
         authorName.textContent = `${myLibrary[i].author}`;
         numPages.textContent = `${myLibrary[i].pages}`;
-        readStatus.textContent = `${myLibrary[i].read}`;
+
+        if (myLibrary[i].read != false) {
+            readBookBtn.textContent = 'Read';
+            readStatus.textContent = 'Read'
+        } else {
+            readBookBtn.textContent = 'Not read';
+            readStatus.textContent = 'Not read';
+        }
 
         bookWrapper.appendChild(bookContainer);
         bookContainer.appendChild(bookName);
         bookContainer.appendChild(authorName);
         bookContainer.appendChild(numPages);
         bookContainer.appendChild(readStatus);
+        bookContainer.appendChild(readBookBtn);
 
         const removeBook = document.createElement('button');
         removeBook.className = 'remove-book';
@@ -79,7 +91,20 @@ function displayBook(myLibrary) {
         bookContainer.appendChild(removeBook);
         bookWrapper.appendChild(bookContainer);
 
-
+        readBookBtn.addEventListener('click', () => {
+            if (myLibrary[i].read) {
+                myLibrary[i].read = false;
+                console.log('button pressed');
+                console.log(myLibrary[i].read);
+                displayBook(myLibrary); 
+            } else {
+                myLibrary[i].read = true;
+                console.log('button unpressed');
+                displayBook(myLibrary); 
+            }
+        });
+        
+        
     }
 
 }
@@ -90,5 +115,4 @@ function removeBookHandler(index) {
     console.log(myLibrary);
     displayBook(myLibrary); 
 }
-
 
