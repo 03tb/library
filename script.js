@@ -9,6 +9,9 @@ function Book(title, author, pages, read, index) {
     myLibrary.push(this);
 }
 
+myLibrary[0] = new Book ('Welcome to your library', '03tb', 142, true, 0);
+myLibrary[1] = new Book ('Game of Thrones', 'George R.R. Martin', 782, false, 0);
+displayBook(myLibrary);
 
 // Add book button
 
@@ -25,9 +28,19 @@ addBook.addEventListener('click', (event) => {
     } else {
         new Book(bookName.value, bookAuthor.value,  bookPages.value, false, myLibrary.length)
     }
+    bookName.value = '';
+    bookAuthor.value = '';
+    bookPages.value = '';
+    clearRadio();
+
     console.log(myLibrary);
     displayBook(myLibrary);
 })
+
+function clearRadio() {
+    let radio = document.getElementById("hasRead");
+    radio.checked = false;
+}
 
 
 // Logic to display books
@@ -38,8 +51,6 @@ function displayBook(myLibrary) {
     bookWrapper.textContent = "";
 
     for (let i = 0; i < myLibrary.length; i++) {
-
-
         const bookContainer = document.createElement('div');
         bookContainer.className = 'book-container';
 
@@ -49,7 +60,7 @@ function displayBook(myLibrary) {
         const authorName = document.createElement('h3');
         authorName.className = 'author-name';
         
-        const numPages = document.createElement('span');
+        const numPages = document.createElement('h3');
         numPages.className = 'number-pages';
 
         const addTitle = document.createElement('h3');
@@ -58,37 +69,47 @@ function displayBook(myLibrary) {
         const readStatus = document.createElement('h3');
         readStatus.className = 'read-status';
 
+        const buttonDiv = document.createElement('div');
+        buttonDiv.className = 'button-div';
+
+        const innerWrapper = document.createElement('div');
+        innerWrapper.className = 'inner-wrapper';
+
         const readBookBtn = document.createElement('button');
         readBookBtn.className = 'read-book';
         readBookBtn.textContent = 'Read / Unread';
 
-        bookName.textContent = `${myLibrary[i].title}`;
-        authorName.textContent = `${myLibrary[i].author}`;
-        numPages.textContent = `${myLibrary[i].pages}`;
-
-        if (myLibrary[i].read != false) {
-            readBookBtn.textContent = 'Read';
-            readStatus.textContent = 'Read'
-        } else {
-            readBookBtn.textContent = 'Not read';
-            readStatus.textContent = 'Not read';
-        }
-
-        bookWrapper.appendChild(bookContainer);
-        bookContainer.appendChild(bookName);
-        bookContainer.appendChild(authorName);
-        bookContainer.appendChild(numPages);
-        bookContainer.appendChild(readStatus);
-        bookContainer.appendChild(readBookBtn);
-
         const removeBook = document.createElement('button');
         removeBook.className = 'remove-book';
         removeBook.textContent = 'Remove book'
-        bookContainer.appendChild(removeBook)
+
+        bookName.textContent = `${myLibrary[i].title}`;
+        authorName.textContent = `By: ${myLibrary[i].author}`;
+        numPages.textContent = `Pages: ${myLibrary[i].pages}`;
+
+        if (myLibrary[i].read != false) {
+            readBookBtn.textContent = 'Set to unread';
+            readStatus.textContent = 'Read'
+            readStatus.setAttribute('style', 'color: green')
+        } else {
+            readBookBtn.textContent = 'Set to read';
+            readStatus.textContent = 'Not read';
+            readStatus.setAttribute('style', 'color: red')
+        }
+
+        bookWrapper.appendChild(bookContainer);
+        innerWrapper.appendChild(bookName);
+        innerWrapper.appendChild(authorName);
+        innerWrapper.appendChild(numPages);
+        innerWrapper.appendChild(readStatus);
+
+        buttonDiv.appendChild(readBookBtn);
+        buttonDiv.appendChild(removeBook)
+        bookContainer.appendChild(innerWrapper);
+        bookContainer.appendChild(buttonDiv);
 
         removeBook.addEventListener('click', () => removeBookHandler(i));
 
-        bookContainer.appendChild(removeBook);
         bookWrapper.appendChild(bookContainer);
 
         readBookBtn.addEventListener('click', () => {
