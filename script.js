@@ -1,12 +1,14 @@
 const myLibrary = [];
 
-function Book(title, author, pages, read, index) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.index = index;
-    myLibrary.push(this);
+class Book {
+    constructor(title, author, pages, read, index) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.index = index;
+        myLibrary.push(this);
+    }
 }
 
 myLibrary[0] = new Book ('Welcome to your library', '03tb', 142, true, 0);

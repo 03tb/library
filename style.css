@@ -181,3 +181,53 @@ body {
     font-family: 'Helvetica Neue', sans-serif;
     font-size: 15px;
 }
+
+@media (max-width: 1640px) {
+    .book-wrapper {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 1440px) {
+    .book-wrapper {
+        justify-content: center;
+        grid-template-columns: repeat(auto-fill, 300px);
+        grid-template-rows: repeat(auto-fill, 320px);
+        grid-auto-rows: 320px;
+    }
+
+    .container {
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 30% 70%;
+        grid-template-rows: 1fr;
+    }
+
+    .book-details > input {
+        width: 260px;
+        height: 25px;
+        border-radius: 8px;
+    }
+
+    .button-div > button {
+        width: 100px;
+    }
+
+    .book-details > input {
+        width: 170px;
+    }
+
+    .addBook {
+        width: 200px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 920px) {
+        .book-wrapper {
+        justify-content: center;
+        grid-template-columns: repeat(auto-fill, 300px);
+        grid-template-rows: repeat(auto-fill, 320px);
+        grid-auto-rows: 320px;
+    }
+}
